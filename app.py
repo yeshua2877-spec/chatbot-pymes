@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import anthropic
 from dotenv import load_dotenv
 from flask_cors import CORS
@@ -29,6 +29,16 @@ Lineamientos:
 
 MODEL = "claude-haiku-4-5"
 MAX_TOKENS = 1024
+
+
+@app.route("/")
+def index():
+    return send_from_directory(".", "index.html")
+
+
+@app.route("/widget.js")
+def widget():
+    return send_from_directory(".", "widget.js")
 
 
 @app.route("/chat", methods=["POST"])
