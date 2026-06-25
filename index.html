@@ -33,9 +33,11 @@
 
     /* Hero */
     .hero {
-      background: linear-gradient(135deg, #880e4f 0%, #c2185b 60%, #f48fb1 100%);
+      background:
+        linear-gradient(135deg, rgba(136,14,79,0.72) 0%, rgba(194,24,91,0.55) 55%, rgba(244,143,177,0.35) 100%),
+        url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=2560&q=80') center/cover no-repeat;
       color: #fff;
-      padding: 90px 40px;
+      padding: 110px 40px;
       text-align: center;
     }
     .hero h1 { font-size: 44px; font-weight: 800; margin-bottom: 16px; line-height: 1.15; letter-spacing: -1px; }
@@ -70,11 +72,23 @@
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
     .card-img {
-      height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
+      height: 190px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .card-img-label {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      background: rgba(136,14,79,0.78);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
     }
     .card-body { padding: 16px; }
     .card-name  { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
@@ -103,7 +117,8 @@
     }
     .feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; max-width: 1100px; margin: 32px auto 0; }
     .feat { text-align: center; padding: 24px; }
-    .feat-icon { font-size: 36px; margin-bottom: 12px; }
+    .feat-icon { margin-bottom: 14px; display: flex; justify-content: center; }
+    .feat-icon svg { width: 40px; height: 40px; color: #c2185b; stroke-width: 1.6; }
     .feat h3   { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #880e4f; }
     .feat p    { color: #64748b; font-size: 14px; line-height: 1.5; }
 
@@ -146,6 +161,7 @@
       to   { opacity: 1; transform: translateX(0); }
     }
   </style>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -171,7 +187,7 @@
     <p class="section-sub">Diseños con personalidad para cada ocasión</p>
     <div class="grid">
       <div class="card">
-        <div class="card-img" style="background:#fff5f0">👠</div>
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80')"><span class="card-img-label">Stilettos</span></div>
         <div class="card-body">
           <p class="card-name">Stilettos</p>
           <p class="card-desc">Elegancia y altura para brillar en cada ocasión.</p>
@@ -181,7 +197,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-img" style="background:#fdf0e8">👡</div>
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&q=80')"><span class="card-img-label">Sandalias</span></div>
         <div class="card-body">
           <p class="card-name">Sandalias</p>
           <p class="card-desc">Comodidad y estilo para los días que más lo necesitás.</p>
@@ -191,7 +207,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-img" style="background:#fef9ec">👢</div>
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=600&q=80')"><span class="card-img-label">Botas</span></div>
         <div class="card-body">
           <p class="card-name">Botas</p>
           <p class="card-desc">Carácter y personalidad para cada paso que das.</p>
@@ -201,7 +217,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-img" style="background:#f5f0ff">🥿</div>
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&q=80')"><span class="card-img-label">Chatitas</span></div>
         <div class="card-body">
           <p class="card-name">Chatitas</p>
           <p class="card-desc">Livianas, cómodas y con identidad propia.</p>
@@ -217,10 +233,10 @@
     <p class="section-title" style="text-align:center">¿A qué apuntamos?</p>
     <p class="section-sub" style="text-align:center;margin-bottom:24px">Zapatos para cada momento de tu vida</p>
     <div class="feat-grid" style="margin-top:0">
-      <div class="feat"><div class="feat-icon">💼</div><h3>La oficina</h3><p>Modelos cómodos y elegantes para brillar en tu día a día laboral.</p></div>
-      <div class="feat"><div class="feat-icon">🌙</div><h3>Una noche especial</h3><p>Para esa cena, ese evento, ese momento que merece un zapato a la altura.</p></div>
-      <div class="feat"><div class="feat-icon">🥂</div><h3>Un almuerzo</h3><p>Estilo sin esfuerzo para lucir perfecta en cada encuentro.</p></div>
-      <div class="feat"><div class="feat-icon">👯</div><h3>Salida con amigas</h3><p>Porque cada salida es una excusa para ponerte lo mejor.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="briefcase"></i></div><h3>La oficina</h3><p>Modelos cómodos y elegantes para brillar en tu día a día laboral.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="moon-star"></i></div><h3>Una noche especial</h3><p>Para esa cena, ese evento, ese momento que merece un zapato a la altura.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="utensils-crossed"></i></div><h3>Un almuerzo</h3><p>Estilo sin esfuerzo para lucir perfecta en cada encuentro.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="users-round"></i></div><h3>Salida con amigas</h3><p>Porque cada salida es una excusa para ponerte lo mejor.</p></div>
     </div>
   </div>
 
@@ -229,10 +245,10 @@
       <p class="section-title" style="text-align:center">¿Por qué YO SOY?</p>
     </div>
     <div class="feat-grid">
-      <div class="feat"><div class="feat-icon">✨</div><h3>Identidad propia</h3><p>Cada modelo refleja carácter y personalidad única.</p></div>
-      <div class="feat"><div class="feat-icon">💳</div><h3>Formas de pago</h3><p>Efectivo, transferencia o MercadoPago.</p></div>
-      <div class="feat"><div class="feat-icon">📲</div><h3>Atención personalizada</h3><p>Respondemos por WhatsApp e Instagram.</p></div>
-      <div class="feat"><div class="feat-icon">👠</div><h3>Solo para vos</h3><p>Zapatos de mujer pensados con amor y propósito.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="sparkles"></i></div><h3>Identidad propia</h3><p>Cada modelo refleja carácter y personalidad única.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="credit-card"></i></div><h3>Formas de pago</h3><p>Efectivo, transferencia o MercadoPago.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="smartphone"></i></div><h3>Atención personalizada</h3><p>Respondemos por WhatsApp e Instagram.</p></div>
+      <div class="feat"><div class="feat-icon"><i data-lucide="heart"></i></div><h3>Solo para vos</h3><p>Zapatos de mujer pensados con amor y propósito.</p></div>
     </div>
   </div>
 
@@ -251,6 +267,7 @@
       subtitle: 'Tu asistente de moda',
     };
   </script>
+  <script>lucide.createIcons();</script>
   <script src="widget.js"></script>
 
 </body>
