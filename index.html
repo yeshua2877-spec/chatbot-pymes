@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechStore — Demo ChatBot</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* Nav */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-size: 20px; font-weight: 700; color: #2563eb; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: #475569; font-size: 14px; transition: color .15s; }
+    .nav-links a:hover { color: #2563eb; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+      color: #fff;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 16px; line-height: 1.15; }
+    .hero p  { font-size: 18px; color: rgba(255,255,255,.8); max-width: 560px; margin: 0 auto 32px; }
+    .hero-btn {
+      background: #fff;
+      color: #2563eb;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,.15);
+      transition: transform .15s;
+    }
+    .hero-btn:hover { transform: translateY(-2px); }
+
+    /* Products */
+    .section { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
+    .section-title { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .section-sub   { color: #64748b; margin-bottom: 32px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .card-img {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+    }
+    .card-body { padding: 16px; }
+    .card-name  { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+    .card-desc  { color: #64748b; font-size: 13px; margin-bottom: 12px; line-height: 1.45; }
+    .card-foot  { display: flex; align-items: center; justify-content: space-between; }
+    .price      { font-size: 18px; font-weight: 700; color: #2563eb; }
+    .add-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .add-btn:hover { background: #1d4ed8; }
+
+    /* Features */
+    .features {
+      background: #fff;
+      padding: 60px 40px;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; max-width: 1100px; margin: 32px auto 0; }
+    .feat { text-align: center; padding: 24px; }
+    .feat-icon { font-size: 36px; margin-bottom: 12px; }
+    .feat h3   { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .feat p    { color: #64748b; font-size: 14px; line-height: 1.5; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: #94a3b8;
+      font-size: 13px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* Demo hint */
+    .hint {
+      position: fixed;
+      bottom: 92px;
+      right: 96px;
+      background: #1e293b;
+      color: #fff;
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      animation: hint-in .4s .8s both;
+      pointer-events: none;
+    }
+    .hint::after {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-left-color: #1e293b;
+      border-right: none;
+    }
+    @keyframes hint-in {
+      from { opacity: 0; transform: translateX(8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">TechStore</span>
+    <ul class="nav-links">
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Productos</a></li>
+      <li><a href="#">Ofertas</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Tecnología al alcance<br>de tu PyME</h1>
+    <p>Los mejores equipos al mejor precio, con asesoramiento personalizado para tu negocio.</p>
+    <button class="hero-btn">Ver catálogo</button>
+  </section>
+
+  <div class="section">
+    <p class="section-title">Productos destacados</p>
+    <p class="section-sub">Equipos seleccionados para profesionales y empresas</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-img" style="background:#eff6ff">💻</div>
+        <div class="card-body">
+          <p class="card-name">Notebook Pro 14"</p>
+          <p class="card-desc">Intel Core i7, 16 GB RAM, SSD 512 GB. Ideal para trabajo remoto.</p>
+          <div class="card-foot">
+            <span class="price">$899.999</span>
+            <button class="add-btn">Agregar</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#f0fdf4">🖥️</div>
+        <div class="card-body">
+          <p class="card-name">Monitor 27" 4K</p>
+          <p class="card-desc">Panel IPS, 144Hz, USB-C. Perfecto para diseño y edición.</p>
+          <div class="card-foot">
+            <span class="price">$349.999</span>
+            <button class="add-btn">Agregar</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#fefce8">🖨️</div>
+        <div class="card-body">
+          <p class="card-name">Impresora Láser</p>
+          <p class="card-desc">Doble faz automática, WiFi, 30 ppm. Para oficinas exigentes.</p>
+          <div class="card-foot">
+            <span class="price">$189.999</span>
+            <button class="add-btn">Agregar</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#fdf4ff">📱</div>
+        <div class="card-body">
+          <p class="card-name">Tablet Empresarial</p>
+          <p class="card-desc">10.9", 256 GB, compatible con teclado. Movilidad total.</p>
+          <div class="card-foot">
+            <span class="price">$459.999</span>
+            <button class="add-btn">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div style="max-width:1100px;margin:0 auto">
+      <p class="section-title" style="text-align:center">¿Por qué elegirnos?</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-icon">🚚</div><h3>Envío gratis</h3><p>En compras superiores a $150.000 a todo el país.</p></div>
+      <div class="feat"><div class="feat-icon">🔧</div><h3>Garantía extendida</h3><p>Hasta 3 años de garantía en equipos seleccionados.</p></div>
+      <div class="feat"><div class="feat-icon">💳</div><h3>Hasta 18 cuotas</h3><p>Sin interés con tarjetas seleccionadas del banco.</p></div>
+      <div class="feat"><div class="feat-icon">🤝</div><h3>Soporte técnico</h3><p>Atención personalizada de lunes a sábado.</p></div>
+    </div>
+  </div>
+
+  <footer>© 2025 TechStore — Página de demo para el widget de chatbot</footer>
+
+  <!-- Tooltip de ayuda -->
+  <div class="hint">¡Probá el asistente! 👉</div>
+
+  <!-- ✅ Una sola línea para embeber el widget -->
+  <script>
+    window.ChatbotConfig = {
+      apiUrl:   'http://localhost:5001/chat',
+      title:    'TechStore Asistente',
+      subtitle: 'Respondemos en segundos',
+    };
+  </script>
+  <script src="widget.js"></script>
+
+</body>
+</html>
