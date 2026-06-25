@@ -49,6 +49,11 @@ def widget():
     return send_from_directory(".", "widget.js")
 
 
+@app.route("/music.mp3")
+def music():
+    return send_from_directory(".", "music.mp3")
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json()

@@ -160,6 +160,32 @@
       from { opacity: 0; transform: translateX(8px); }
       to   { opacity: 1; transform: translateX(0); }
     }
+
+    /* Music button */
+    #music-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #880e4f, #c2185b);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(194,24,91,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2147483646;
+      transition: transform .2s;
+    }
+    #music-btn:hover { transform: scale(1.08); }
+    #music-btn svg { width: 22px; height: 22px; color: #fff; }
+    #music-btn.playing { animation: music-pulse 2s infinite; }
+    @keyframes music-pulse {
+      0%, 100% { box-shadow: 0 4px 14px rgba(194,24,91,.4); }
+      50%       { box-shadow: 0 4px 22px rgba(194,24,91,.7); }
+    }
   </style>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
@@ -260,6 +286,13 @@
 
   <div class="hint">¡Chateá con nosotras! 👉</div>
 
+  <audio id="bg-music" src="/music.mp3" loop preload="none"></audio>
+  <button id="music-btn" title="Música">
+    <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"/>
+    </svg>
+  </button>
+
   <script>
     window.ChatbotConfig = {
       apiUrl:   'https://chatbot-pymes.onrender.com/chat',
@@ -268,6 +301,26 @@
     };
   </script>
   <script>lucide.createIcons();</script>
+  <script>
+    (function () {
+      var audio = document.getElementById('bg-music');
+      var btn   = document.getElementById('music-btn');
+      var playing = false;
+      btn.addEventListener('click', function () {
+        if (playing) {
+          audio.pause();
+          btn.classList.remove('playing');
+          btn.title = 'Música';
+        } else {
+          audio.volume = 0.35;
+          audio.play().catch(function(){});
+          btn.classList.add('playing');
+          btn.title = 'Pausar música';
+        }
+        playing = !playing;
+      });
+    })();
+  </script>
   <script src="widget.js"></script>
 
 </body>
